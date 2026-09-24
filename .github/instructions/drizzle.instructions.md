@@ -45,15 +45,30 @@ import { asc, count, eq } from 'drizzle-orm';
 import type { Database } from './db';
 import { games } from '../../db/schema';
 
+/**
+ * Returns each game id in a deterministic title order for static generation.
+ *
+ * @param db Shared Drizzle database connection.
+ * @returns Game ids ordered by title to keep page generation stable.
+ */
 export async function getAllGameIds(db: Database): Promise<number[]> {
   const rows = await db.select({ id: games.id }).from(games).orderBy(asc(games.title));
   return rows.map((r) => r.id);
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` should have a TSDoc/JSDoc block describing its purpose, parameters, and return value.
+- Document the injectable `db` argument clearly so the testing pattern stays obvious.
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
+
+## Documentation & Comments
+
+- Comment why a query, transform, or hook exists, not what the code literally does.
+- Use JSDoc/TSDoc for exported functions in the data layer and keep it current when the implementation changes.
+- Treat stale or redundant comments as bugs to fix in the same pull request that changes the logic.
+- Prefer documenting the contract (invariant, ordering guarantee, edge case) over generic comments like "fetch games" above a function that already says `getAllGames`.
 
 ## Determinism
 
