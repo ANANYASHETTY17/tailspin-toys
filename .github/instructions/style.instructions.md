@@ -46,6 +46,14 @@ ALL UI components MUST use dark theme colors:
 - Use semantic grouping: layout, spacing, colors, typography
 - Keep utility combinations readable and maintainable
 
+## TypeScript Style and Documentation
+
+- Use explicit parameter and return types for public TypeScript functions, especially in `db/` and `src/lib/`.
+- Prefer descriptive `interface` and `type` names, and keep contracts stable enough to be self-explanatory.
+- Document intent with TSDoc/JSDoc when a function's purpose is not obvious from its name, and keep the comment aligned with the implementation.
+- Follow the project's comment philosophy: explain why a decision exists, not what the code already states.
+- ESLint remains the enforcement layer for the shared TypeScript and Astro rules; avoid ad hoc `eslint-disable` comments unless the justification is truly required and documented in the code review.
+
 ## Modern UI Patterns
 
 - Rounded corners: `rounded-lg`, `rounded-xl`, `rounded-2xl`

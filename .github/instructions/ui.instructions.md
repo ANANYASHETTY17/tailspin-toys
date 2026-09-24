@@ -51,6 +51,13 @@ Refer to technology-specific instruction files:
 - Use props for configuration, not duplication
 - Document component APIs with TypeScript types
 
+### Commenting Philosophy
+
+- Comment the intent, not the mechanics: explain why a block exists, why a fallback is necessary, or why a pattern was chosen.
+- Do not add comments that restate the code directly above them (for example, "set title to the page title" above `const title = ...`).
+- Remove or update stale comments in the same change that alters the logic they describe.
+- Prefer self-documenting code and TSDoc/JSDoc on public component or helper contracts over paragraph comments that duplicate the implementation.
+
 ## Development Workflow
 
 1. **Choose the right tool**: 
